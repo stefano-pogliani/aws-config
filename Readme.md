@@ -52,3 +52,30 @@ Attach the following policy to the admin group (`AllowUsedServicesOnly`):
   }]
 }
 ```
+
+
+Secrets
+-------
+Terraform stores secrets into the state file.
+Building HTTPS sites means having certificate files around.
+All these secrets are kept in the `secrets/` directory which is
+not published as part of the repository.
+
+
+Migrating domains
+-----------------
+Migrating domains to AWS (as with any DNS migration) comes with
+a high risk of downtime and/or inconsistencies.
+This is because, while the DNS update propagates, the same name
+points to two resources.
+
+The following steps should minimise downtime:
+
+  1. Create Route53 hosted zone.
+  2. Configure it to point to S3 bucket serving the site.
+  3. Register with your preferred email hosting solution.
+  4. Configure MX record as documented by email hosting service.
+  5. Create all needed inboxes.
+  6. Update domain's NS and wait 48 hours (world wide propagation).
+  7. Migrate email from old server to new.
+  8. Transfer the domain.
