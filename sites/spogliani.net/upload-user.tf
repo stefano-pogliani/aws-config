@@ -22,7 +22,10 @@ resource "aws_iam_user_policy" "spogliani-net-upload" {
       "s3:GetBucketLocation"
     ],
     "Effect": "Allow",
-    "Resource": "${aws_s3_bucket.spogliani-net.arn}"
+    "Resource": [
+      "${aws_s3_bucket.spogliani-net.arn}",
+      "${aws_s3_bucket.www-spogliani-net.arn}"
+    ]
   }, {
     "Action": [
       "s3:DeleteObject",
@@ -30,7 +33,10 @@ resource "aws_iam_user_policy" "spogliani-net-upload" {
       "s3:PutObject"
     ],
     "Effect": "Allow",
-    "Resource": "${aws_s3_bucket.spogliani-net.arn}/*"
+    "Resource": [
+      "${aws_s3_bucket.spogliani-net.arn}/*",
+      "${aws_s3_bucket.www-spogliani-net.arn}/*"
+    ]
   }]
 }
 EOF
