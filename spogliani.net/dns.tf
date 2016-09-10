@@ -15,19 +15,6 @@ resource "aws_route53_record" "dns-root-mx" {
 }
 
 
-# Point to old server so that public IP resolution works.
-resource "aws_route53_record" "dns-myip" {
-  provider = "aws.private"
-
-  zone_id = "${aws_route53_zone.dns-root.zone_id}"
-  name = "myip.spogliani.net"
-  type = "A"
-
-  ttl  = "300"
-  records = ["212.1.215.8"]
-}
-
-
 /*** DKIM settings. ***/
 variable "dkim-cname-count" {
   type = "string"

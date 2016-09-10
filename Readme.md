@@ -79,3 +79,23 @@ The following steps should minimise downtime:
   6. Update domain's NS and wait 48 hours (world wide propagation).
   7. Migrate email from old server to new.
   8. Transfer the domain.
+
+
+Create AWS CLI profile
+----------------------
+```bash
+$> aws --profile=flaviopogliani-net configure
+AWS Access Key ID [None]: *****
+AWS Secret Access Key [None]: ******
+Default region name [None]: eu-west-1
+Default output format [None]: json
+```
+
+
+Upload static PHP site
+----------------------
+```bash
+wget --recursive --convert-links -E -p --domains=flaviopogliani.net http://flaviopogliani.net/
+aws --profile=flaviopogliani-net s3 sync --delete flaviopogliani.net s3://flaviopogliani.net/
+aws --profile=flaviopogliani-net s3 sync --delete flaviopogliani.net s3://www.flaviopogliani.net/
+```
