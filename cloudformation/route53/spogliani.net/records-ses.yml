@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: All SES records for the spogliani.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: ZW94R9XFGJ0MX
+
+
+Resources:
+  SesVerificationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_amazonses.spogliani.net.'
+      ResourceRecords:
+        - '"urayRj0bKaRTFSZUlIjgVB8k7rtWHw57VbCvsfOFImU="'
+      TTL: 300
+      Type: 'TXT'

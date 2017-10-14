@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The root records for the flaviopogliani.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z1CVRNQ0YYAYLS
+
+
+Resources:
+  MailExchangeRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'flaviopogliani.net.'
+      ResourceRecords:
+        - '0 mail5.hostinguk.net.'
+      TTL: 300
+      Type: 'MX'
+
+  WebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'd1i8g3nyi3b88o.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'flaviopogliani.net.'
+      Type: 'A'
+
+  WwwWebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'd1i8g3nyi3b88o.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'www.flaviopogliani.net.'
+      Type: 'A'

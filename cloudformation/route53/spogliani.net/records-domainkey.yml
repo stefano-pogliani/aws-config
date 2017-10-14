@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The domainkey records for the spogliani.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: ZW94R9XFGJ0MX
+
+
+Resources:
+  HostingUKDomainKeyRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'spogliani2016._domainkey.spogliani.net.'
+      ResourceRecords:
+        - '"p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvwSenH9+xnED28bUyMrIOmGPpseS2KoXH+3It7GceKz5D7+PoEihfIwQkDvEmiqU8NBWjl0v8wtxMz12ZenkMt7IgZHAYhIx6zrnYEhtP6ii/LBBhAFAGz6xxlokyWFSHdepn2O5N+NwtmhLxf8eQK0Jq9IUEqROGZZ91hXhe8QIDAQAB"'
+      TTL: 300
+      Type: 'TXT'
+
+  SesDomainKeyRecord1:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '7ix4pdo6pudpj2lgzmseyuld7md456eu._domainkey.spogliani.net.'
+      ResourceRecords:
+        - '7ix4pdo6pudpj2lgzmseyuld7md456eu.dkim.amazonses.com'
+      TTL: 300
+      Type: 'CNAME'
+
+  SesDomainKeyRecord2:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '5wk4bei6m7sqohknxypo5bos7czlhzms._domainkey.spogliani.net.'
+      ResourceRecords:
+        - '5wk4bei6m7sqohknxypo5bos7czlhzms.dkim.amazonses.com'
+      TTL: 300
+      Type: 'CNAME'
+
+  SesDomainKeyRecord3:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'eptpfsbm6w6xiaa33qedvu3i4xs6rsqb._domainkey.spogliani.net.'
+      ResourceRecords:
+        - 'eptpfsbm6w6xiaa33qedvu3i4xs6rsqb.dkim.amazonses.com'
+      TTL: 300
+      Type: 'CNAME'

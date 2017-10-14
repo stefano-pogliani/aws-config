@@ -1,0 +1,2 @@
+# This zone was created with Terraform and recreation requires DNS disruption.
+# This template is here as a reminded of why the zone is not in CloudFormation.

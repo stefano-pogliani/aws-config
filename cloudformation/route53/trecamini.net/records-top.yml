@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The root records for the trecamini.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z3IRV9DEY0YXMW
+
+
+Resources:
+  MailExchangeRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'trecamini.net.'
+      ResourceRecords:
+        - '0 mail5.hostinguk.net.'
+      TTL: 300
+      Type: 'MX'
+
+  WebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'dxl3ls2bmlxfu.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'trecamini.net.'
+      Type: 'A'
+
+  WwwWebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'dxl3ls2bmlxfu.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'www.trecamini.net.'
+      Type: 'A'

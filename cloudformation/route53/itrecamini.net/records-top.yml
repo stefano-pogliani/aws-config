@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The root records for the itrecamini.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: ZG4RCIHW15QI3
+
+
+Resources:
+  WebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'dxl3ls2bmlxfu.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'itrecamini.net.'
+      Type: 'A'
+
+  WwwWebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'dxl3ls2bmlxfu.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'www.itrecamini.net.'
+      Type: 'A'

@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Configure an S3 Bucket to store AWS service logs (S3/CloudFront/...)
+
+
+Resources:
+  LogsBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      AccessControl: 'LogDeliveryWrite'
+      BucketName: 'spogliani-logs'
+      LifecycleConfiguration:
+        Rules:
+          - ExpirationInDays: 365
+            Status: 'Enabled'
+            Transitions:
+              - StorageClass: 'GLACIER'
+                TransitionInDays: 90
