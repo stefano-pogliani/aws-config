@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Records for the home.spogliani.net subdomain.
+
+
+Parameters:
+  DynamicName:
+    Description: The dynamic DNS name to CNAME the subdomain to.
+    Type: String
+    Default: 'spddns.no-ip.biz.'
+
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: ZW94R9XFGJ0MX
+
+
+Resources:
+  TopRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'home.spogliani.net.'
+      ResourceRecords:
+        - !Ref DynamicName
+      TTL: 3600
+      Type: 'CNAME'
+
+  GrafanaRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'grafana.home.spogliani.net.'
+      ResourceRecords:
+        - !Ref DynamicName
+      TTL: 3600
+      Type: 'CNAME'
