@@ -34,3 +34,13 @@ Resources:
         - !Ref DynamicName
       TTL: 3600
       Type: 'CNAME'
+
+  PrometheusRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'prometheus.home.spogliani.net.'
+      ResourceRecords:
+        - !Ref DynamicName
+      TTL: 3600
+      Type: 'CNAME'
