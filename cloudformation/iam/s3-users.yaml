@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Users with restricted access to S3 Buckets'
+
+
+Resources:
+  M910QBackups:
+    Type: 'AWS::IAM::User'
+    Properties: 
+      UserName: 'backups-m910q'
+      Policies:
+        - PolicyName: 'AllowBackups'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - 's3:ListBucket'
+                  - 's3:GetBucketLocation'
+                Effect: Allow
+                Resource:
+                  - 'arn:aws:s3:::spogliani-backups'
+              - Action:
+                  - 's3:GetObject'
+                  - 's3:PutObject'
+                Effect: Allow
+                Resource:
+                  - 'arn:aws:s3:::spogliani-backups/thinkpad-m910q/*'
