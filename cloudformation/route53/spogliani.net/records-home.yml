@@ -25,6 +25,16 @@ Resources:
       TTL: 3600
       Type: 'CNAME'
 
+  WildCharRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '*.home.spogliani.net.'
+      ResourceRecords:
+        - !Ref DynamicName
+      TTL: 3600
+      Type: 'CNAME'
+
   GrafanaRecord:
     Type: 'AWS::Route53::RecordSet'
     Properties:
