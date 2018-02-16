@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The AWS Certificate Manager validation records for the replicante.io zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z5GK87GOSRX6G
+
+
+Resources:
+  ValidateRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_48359c9d8091c7a3ea486faaba312e36.replicante.io.'
+      ResourceRecords:
+        - '_b2118926637a1d7140b0c01e658ecdaa.acm-validations.aws.'
+      TTL: 3600
+      Type: 'CNAME'
+
+  WwwValidateRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_856bf6c71cf1327f15f73dcb9d57c58e.www.replicante.io.'
+      ResourceRecords:
+        - '_534cec2b7dd4dfabb279d8a618650383.acm-validations.aws.'
+      TTL: 3600
+      Type: 'CNAME'

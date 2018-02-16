@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The root records for the replicante.io zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z5GK87GOSRX6G
+
+
+Resources:
+  WebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'd35xbymgu7dt6n.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'replicante.io.'
+      Type: 'A'
+
+  WwwWebSiteRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName: 'd35xbymgu7dt6n.cloudfront.net'
+        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'www.replicante.io.'
+      Type: 'A'
