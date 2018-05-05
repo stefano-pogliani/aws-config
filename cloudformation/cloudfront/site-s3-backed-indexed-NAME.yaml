@@ -1,0 +1,84 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Host an HTTPs WebSite backed by S3.
+
+
+Parameters:
+  DistributionAliases:
+    Description: 'Comma separated list of DNS names (i.e: spogliani.net,www.spogliani.net)'
+    Type: CommaDelimitedList
+
+  SiteCertificate:
+    Description: The ARN of the ACM certificate in us-east-1.
+    Type: String
+
+  SiteRootName:
+    Description: Main DNS name for the site (to name the origin).
+    Type: String
+
+
+Resources:
+  # Can only specify ACM certificates from us-east-1.
+  # Because of this restriction certificates are manually generated
+  # and referenced as parameters.
+  # This resource was left here for reference.
+  #SiteCertificate:
+  #  Type: 'AWS::CertificateManager::Certificate'
+  #  Properties:
+  #    DomainName: !Ref SiteDomainName
+  #    SubjectAlternativeNames: !Ref SiteAlternativeNames
+
+  OriginBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub origin.${SiteRootName}
+      WebsiteConfiguration:
+        ErrorDocument: '404.html'
+        IndexDocument: 'index.html'
+
+  AllowCloudFrontAccess:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref OriginBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowCloudFrontAccess
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+            Principal:
+              AWS: "*"
+            Resource: !Sub
+              - ${BucketArn}/*
+              - BucketArn: !GetAtt OriginBucket.Arn
+
+  CloudFrontDistro:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Aliases: !Ref DistributionAliases
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: '/404.html'
+        DefaultCacheBehavior:
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: 'redirect-to-https'
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: 'http2'
+        Origins:
+          - Id: S3Origin
+            DomainName: !Select
+              - 1
+              - !Split ["://", !GetAtt OriginBucket.WebsiteURL]
+            CustomOriginConfig:
+              OriginProtocolPolicy: 'http-only'
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: !Ref SiteCertificate
+          MinimumProtocolVersion: 'TLSv1'
+          SslSupportMethod: 'sni-only'
