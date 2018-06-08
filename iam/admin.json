@@ -21,6 +21,11 @@
     "Action": ["cloudfront:*"],
     "Resource": ["*"]
   }, {
+    "Sid": "AllowCloudTrail",
+    "Effect": "Allow",
+    "Action": ["cloudtrail:*"],
+    "Resource": ["*"]
+  }, {
     "Sid": "AllowCloudWatch",
     "Effect": "Allow",
     "Action": ["cloudwatch:*"],
