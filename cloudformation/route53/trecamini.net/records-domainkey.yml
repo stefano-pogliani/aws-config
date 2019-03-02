@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The DKIM records for the trecamini.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z3IRV9DEY0YXMW
+
+
+Resources:
+  HostingUKDomainKeyRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '8D69F4D817677BD._domainKey.trecamini.net'
+      # DNS TXT records are limited to 255 characters strings.
+      # There are, on the other hand, no limits to the number of 255 charachter strings.
+      # This is done by concatenating a number of quoted `"` strings in the same array element.
+      # (using multiple elements in the array creates multiple TXT records).
+      ResourceRecords:
+        - '"p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1UOusxI+xcMqAWKa+Y0RVEJdXYaXP4lkc4k4FIdRA3QSsMX3bl0bwOaiVDsfvr20SJhwvk3x/iyDFjRbLDbOs7El2l3+DHA2l2bGTYyZbAJq4S38/pTqknqcsGmG9Ve2hiZb+B0kvn1PPRMsED7Bb0hxS3x/PbW1xIW4qa9HwpJxhmnoPxBsW5eyo0EIcsw7Dcll70avwvt96jht""eyZMG64t0iFvKMqAJsl6LICUwcfXGAblPz6iUEVP71CaCGnR4nkBjq314/8VKTMqwiGEFvCEfzfH0IzAq1FsxGtQEEsBc6RGHX/Mr4HDctvKchd75HDX2bHrAsoNaK8dbWLDWQIDAQAB"'
+      TTL: 300
+      Type: 'TXT'

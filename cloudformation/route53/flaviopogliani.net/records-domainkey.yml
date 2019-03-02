@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The DKIM records for the flaviopogliani.net zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z1CVRNQ0YYAYLS
+
+
+Resources:
+  HostingUKDomainKeyRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '8D69F4892B2CBD5._domainKey.flaviopogliani.net'
+      # DNS TXT records are limited to 255 characters strings.
+      # There are, on the other hand, no limits to the number of 255 charachter strings.
+      # This is done by concatenating a number of quoted `"` strings in the same array element.
+      # (using multiple elements in the array creates multiple TXT records).
+      ResourceRecords:
+        - '"p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz5hBHsgHB4eWStQhXxlM1UmVlGJYCgAc6IS8TZQTGCu4TW2uhPmW2V+Nq344LcOFkThs66H3x9L0KvqGbCLAJRnCXTskFm+gR5f5sJ44neU9C8dGCehrdSn293x+2X2gtkrQSmEsAsI4FAg0ZHPQL0R3mENPWfRCJ3hBp9Kxqy266itbSROKS3FasexmNpVZtABlXClscHC3mTFu""Q2lSkY3NMp5jyCJRbJEXY5iGIMo3Lmf7WvB1KcqW8UgB8Ah2q4/ISzeY2Fz0HIJ7k6fM2mY3lGyFhvk7dFPiocURUKfp/xNQnBiR49H9PZ0ZxVg3C/mhpAHFKxGAn5ruA5yqaQIDAQAB"'
+      TTL: 300
+      Type: 'TXT'

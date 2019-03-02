@@ -20,6 +20,16 @@ Resources:
       TTL: 300
       Type: 'MX'
 
+  SpfRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'flaviopogliani.net.'
+      ResourceRecords:
+        - '"v=spf1 a mx include:hostinguk.net -all"'
+      TTL: 300
+      Type: 'TXT'
+
   WebSiteRecord:
     Type: 'AWS::Route53::RecordSet'
     Properties:
