@@ -10,6 +10,29 @@ Parameters:
 
 
 Resources:
+  MailExchangeRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'replicante.io.'
+      ResourceRecords:
+        - '10 mx.zoho.eu.'
+        - '20 mx2.zoho.eu.'
+        - '50 mx3.zoho.eu.'
+      TTL: 300
+      Type: 'MX'
+
+  TxtRecords:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'replicante.io.'
+      ResourceRecords:
+        - '"zoho-verification=zb15520704.zmverify.zoho.eu"'
+        - '"v=spf1 include:zoho.eu -all"'
+      TTL: 300
+      Type: 'TXT'
+
   WebSiteRecord:
     Type: 'AWS::Route53::RecordSet'
     Properties:

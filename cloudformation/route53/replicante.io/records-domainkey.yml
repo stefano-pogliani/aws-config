@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: The domainkey records for the replicante.io zone
+
+
+Parameters:
+  HostedZoneID:
+    Description: The ID of the Hosted Zone for the domain.
+    Type: String
+    Default: Z5GK87GOSRX6G
+
+
+Resources:
+  ZohoDomainKeyRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: 'zoho._domainkey.replicante.io.'
+      ResourceRecords:
+        - '"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRte++uPWyGF+xmvIZCpWSAFWezwsguJbcz7EsJ3Ejqw0ZpAW1URgdzqe8wq7rlp9NgLKJeOELm3IJFcIND1s3CKzlOnJPGUiU645yn1JE9CIrj5ph6fUtzsdiVAAmmJ1y1QxHM35rqKWZhlpPaHni8DzLHSdf7Zoujy8eu36F3wIDAQAB"'
+      TTL: 300
+      Type: 'TXT'
