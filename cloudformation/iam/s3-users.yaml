@@ -23,4 +23,4 @@ Resources:
                   - 's3:PutObject'
                 Effect: Allow
                 Resource:
-                  - 'arn:aws:s3:::spogliani-backups/thinkpad-m910q/*'
+                  - 'arn:aws:s3:::spogliani-backups/automated/thinkpad-m910q/*'
