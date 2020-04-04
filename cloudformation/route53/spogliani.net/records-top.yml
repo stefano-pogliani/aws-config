@@ -33,19 +33,22 @@ Resources:
   WebSiteRecord:
     Type: 'AWS::Route53::RecordSet'
     Properties:
-      AliasTarget:
-        DNSName: 'd2ru17u2xebyzd.cloudfront.net'
-        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
       HostedZoneId: !Ref HostedZoneID
       Name: 'spogliani.net.'
+      ResourceRecords:
+        - '185.199.108.153'
+        - '185.199.109.153'
+        - '185.199.110.153'
+        - '185.199.111.153'
+      TTL: 14400  # 4 Hours TTL
       Type: 'A'
 
   WwwWebSiteRecord:
     Type: 'AWS::Route53::RecordSet'
     Properties:
-      AliasTarget:
-        DNSName: 'd2ru17u2xebyzd.cloudfront.net'
-        HostedZoneId: 'Z2FDTNDATAQYW2'  # Magic Value provided by AWS.
       HostedZoneId: !Ref HostedZoneID
       Name: 'www.spogliani.net.'
-      Type: 'A'
+      ResourceRecords:
+        - 'stefano-pogliani.github.io'
+      TTL: 14400  # 4 Hours TTL
+      Type: 'CNAME'

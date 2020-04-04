@@ -6,7 +6,7 @@ Parameters:
   DynamicName:
     Description: The dynamic DNS name to CNAME the subdomain to.
     Type: String
-    Default: 'spddns.no-ip.biz.'
+    Default: '137.220.91.60'
 
   HostedZoneID:
     Description: The ID of the Hosted Zone for the domain.
@@ -23,7 +23,7 @@ Resources:
       ResourceRecords:
         - !Ref DynamicName
       TTL: 3600
-      Type: 'CNAME'
+      Type: 'A'
 
   WildCharRecord:
     Type: 'AWS::Route53::RecordSet'
@@ -31,26 +31,6 @@ Resources:
       HostedZoneId: !Ref HostedZoneID
       Name: '*.home.spogliani.net.'
       ResourceRecords:
-        - !Ref DynamicName
-      TTL: 3600
-      Type: 'CNAME'
-
-  GrafanaRecord:
-    Type: 'AWS::Route53::RecordSet'
-    Properties:
-      HostedZoneId: !Ref HostedZoneID
-      Name: 'grafana.home.spogliani.net.'
-      ResourceRecords:
-        - !Ref DynamicName
-      TTL: 3600
-      Type: 'CNAME'
-
-  PrometheusRecord:
-    Type: 'AWS::Route53::RecordSet'
-    Properties:
-      HostedZoneId: !Ref HostedZoneID
-      Name: 'prometheus.home.spogliani.net.'
-      ResourceRecords:
-        - !Ref DynamicName
-      TTL: 3600
+        - 'home.spogliani.net.'
+      TTL: 86400
       Type: 'CNAME'
