@@ -29,3 +29,23 @@ Resources:
       HostedZoneId: !Ref HostedZoneID
       Name: 'www.trecamini.com.'
       Type: 'A'
+
+  WebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_e4b15168a0ccab56f8648d33716c2198.trecamini.com.'
+      ResourceRecords:
+        - '_857246b7aec3dca0d424e8e691dc9603.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'
+
+  WwwWebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_f7d4c68a588efbafc3135c251fb45ee6.www.trecamini.com.'
+      ResourceRecords:
+        - '_aa5c831b8ec7179b4db3918f93f73371.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'

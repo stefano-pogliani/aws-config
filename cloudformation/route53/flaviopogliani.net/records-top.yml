@@ -49,3 +49,23 @@ Resources:
       HostedZoneId: !Ref HostedZoneID
       Name: 'www.flaviopogliani.net.'
       Type: 'A'
+
+  WebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_bebf861b371e844c43d92872543097d0.flaviopogliani.net.'
+      ResourceRecords:
+        - '_792cafd2531a013d9ee3de10e678900e.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'
+
+  WwwWebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_b1995d2e4abb1209e04f0bdd6b6ff3c6.www.flaviopogliani.net.'
+      ResourceRecords:
+        - '_ef266e2c1f4b4a70cba900ae5e8f6e18.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'

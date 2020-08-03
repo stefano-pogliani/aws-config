@@ -29,3 +29,23 @@ Resources:
       HostedZoneId: !Ref HostedZoneID
       Name: 'www.itrecamini.net.'
       Type: 'A'
+
+  WebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_5fda10005754b9e73c3ee1c4fc95596d.itrecamini.net.'
+      ResourceRecords:
+        - '_b642372a1a02f53b2360c17b2bf881ab.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'
+
+  WwwWebSiteCertificateValidationRecord:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneID
+      Name: '_2f99841d1d4918748c15a3eb95253939.www.itrecamini.net.'
+      ResourceRecords:
+        - '_efb8636b4f60c51d5b9e8d5180825540.jfrzftwwjs.acm-validations.aws.'
+      TTL: 86400  # 24 Hours TTL
+      Type: 'CNAME'
